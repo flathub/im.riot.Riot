@@ -39,8 +39,8 @@
                 {
                     "type": "file",
                     "only-arches": ["x86_64"],
-                    "url": "https://riot.im/packages/debian/pool/main/r/riot-web/riot-web_0.17.6_amd64.deb",
-                    "sha256": "4eaead15ab27fcdf35a19714488fd58464306a23e67472b96ae7fc8c5b175ab5"
+                    "url": "https://riot.im/packages/debian/pool/main/r/riot-web/riot-web_0.17.8_amd64.deb",
+                    "sha256": "aeb37398a5cdc72042d9c4c1fcb8c280ee06eb1e2445f16b29014dc887f5be9b"
                 },
                 {
                     "type": "script",
