@@ -20,7 +20,7 @@
         "--talk-name=org.freedesktop.portal.Fcitx",
         "--talk-name=org.freedesktop.secrets",
         "--talk-name=org.kde.StatusNotifierWatcher",
-        "--filesystem=xdg-run/keyring"
+        "--filesystem=xdg-run/keyring",
         "--filesystem=host"
     ],
     "modules": [
