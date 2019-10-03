@@ -21,6 +21,7 @@
         "--talk-name=org.freedesktop.secrets",
         "--talk-name=org.kde.StatusNotifierWatcher",
         "--filesystem=xdg-run/keyring"
+        "--filesystem=host"
     ],
     "modules": [
         {
