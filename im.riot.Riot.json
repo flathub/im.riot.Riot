@@ -24,6 +24,16 @@
     ],
     "modules": [
         {
+            "name": "zypak",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/refi64/zypak",
+                    "tag": "v2019.11beta.3"
+                }
+            ]
+        },
+        {
             "name": "riot",
             "buildsystem": "simple",
             "build-commands": [
@@ -49,7 +59,7 @@
                     "type": "script",
                     "dest-filename": "riot.sh",
                     "commands": [
-                        "exec env TMPDIR=$XDG_CACHE_HOME /app/Riot/riot-web --no-sandbox \"$@\""
+                        "exec env TMPDIR=$XDG_CACHE_HOME zypak-wrapper /app/Riot/riot-web\"$@\""
                     ]
                 },
                 {
