@@ -59,11 +59,6 @@
                 {
                     "type": "file",
                     "path": "im.riot.Riot.desktop"
-                },
-                {
-                    "type": "archive",
-                    "url": "https://github.com/vector-im/riot-web/releases/download/v1.5.7/riot-v1.5.7.tar.gz",
-                    "sha256": "e8aff94da4de74d47477663098788e738d45319d3084d3582b82be18ad1d99cc"
                 }
             ]
         }
