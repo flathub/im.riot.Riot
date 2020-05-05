@@ -44,8 +44,8 @@
                     "only-arches": [
                         "x86_64"
                     ],
-                    "url": "https://packages.riot.im/debian/pool/main/r/riot-web/riot-web_1.5.15_amd64.deb",
-                    "sha256": "8a253bb037cb68e5a5a67b7204a76bb529f76a8303fd9de44ace6f41acb58299",
+                    "url": "https://packages.riot.im/debian/pool/main/r/riot-web/riot-web_1.6.0_all.deb",
+                    "sha256": "c01516a16fc210497be1f056403c1c18571b812fd5b7830dc5e0e79c13cc8c46",
                     "x-checker-data": {
                         "type": "debian-repo",
                         "package-name": "riot-web",
@@ -53,7 +53,7 @@
                         "dist": "sid",
                         "component": "main"
                     },
-                    "size": 57742300
+                    "size": 2176
                 },
                 {
                     "type": "script",
