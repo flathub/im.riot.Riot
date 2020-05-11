@@ -43,7 +43,9 @@
             "build-options": {
                 "no-debuginfo": true
             },
-            "cleanup": [ "*" ],
+            "cleanup": [
+                "*"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -105,8 +107,8 @@
                     "only-arches": [
                         "x86_64"
                     ],
-                    "url": "https://packages.riot.im/debian/pool/main/r/riot-desktop/riot-desktop_1.6.0_amd64.deb",
-                    "sha256": "d768b227f916ef42aae46114340189349e1015516cb1ef16c2c0ec07efba5ca3",
+                    "url": "https://packages.riot.im/debian/pool/main/r/riot-desktop/riot-desktop_1.6.0-2_amd64.deb",
+                    "sha256": "ebfdde6dfae34e674e904723325751048357d85b2c99c5b047e629f3edb233ee",
                     "x-checker-data": {
                         "type": "debian-repo",
                         "package-name": "riot-desktop",
@@ -114,7 +116,7 @@
                         "dist": "sid",
                         "component": "main"
                     },
-                    "size": 61359510
+                    "size": 61352464
                 },
                 {
                     "type": "script",
