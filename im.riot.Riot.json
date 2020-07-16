@@ -107,8 +107,8 @@
                     "only-arches": [
                         "x86_64"
                     ],
-                    "url": "https://packages.riot.im/debian/pool/main/r/riot-desktop/riot-desktop_1.6.8_amd64.deb",
-                    "sha256": "5d0432129fa74893db728016895f0b19271a8004f943999e4bc1895ee306ce3f",
+                    "url": "https://packages.riot.im/debian/pool/main/r/riot-desktop/riot-desktop_1.7.0_all.deb",
+                    "sha256": "239f5d52ae4424ec8f15e2e736847c1f3d91ec841ba9203d0352a96b98fe7a97",
                     "x-checker-data": {
                         "type": "debian-repo",
                         "package-name": "riot-desktop",
@@ -116,7 +116,7 @@
                         "dist": "sid",
                         "component": "main"
                     },
-                    "size": 64697190
+                    "size": 740
                 },
                 {
                     "type": "script",
