@@ -107,16 +107,15 @@
                     "only-arches": [
                         "x86_64"
                     ],
-                    "url": "https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.15_amd64.deb",
-                    "sha256": "3d5426fb98c4d441247d4cefd4d9509d26bb1b159227cd4d674dae416af04bbc",
+                    "url": "https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.16_amd64.deb",
+                    "sha256": "5280051d99a52412bfd40907c979adaadfcd35accdfd425b76e5b0e58b191759",
                     "x-checker-data": {
                         "type": "debian-repo",
                         "package-name": "element-desktop",
                         "root": "https://packages.riot.im/debian",
                         "dist": "sid",
                         "component": "main"
-                    },
-                    "size": 69147310
+                    }
                 },
                 {
                     "type": "script",
