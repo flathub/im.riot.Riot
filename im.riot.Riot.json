@@ -50,7 +50,7 @@
                 {
                     "type": "archive",
                     "url": "https://downloads.sourceforge.net/sourceforge/tcl/tcl8.6.10-src.tar.gz",
-                    "sha256": "5196dbf6638e3df8d5c87b5815c8c2b758496eb6f0e41446596c9a4e638d87ed"
+                    "sha256": "251a85b3bac687974f360d3796048c20ded3bf0bd69e0d1cfd1db23d013f89ed"
                 }
             ]
         },
