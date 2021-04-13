@@ -20,7 +20,8 @@
         "--talk-name=org.freedesktop.portal.Fcitx",
         "--talk-name=org.kde.StatusNotifierWatcher",
         "--own-name=org.kde.StatusNotifierItem-2-1",
-        "--filesystem=xdg-run/keyring"
+        "--filesystem=xdg-run/keyring",
+        "--filesystem=xdg-run/pipewire-0"
     ],
     "cleanup": [
         "/include",
@@ -83,6 +84,28 @@
                     "commands": [
                         "AUTOMAKE=\"automake --foreign\" autoreconf -vfi"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "pipewire",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dgstreamer=disabled",
+                "-Dman=false",
+                "-Dsystemd=false"
+            ],
+            "cleanup": [
+                "/include",
+                "/bin",
+                "/etc",
+                "/lib/pkgconfig"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/PipeWire/pipewire.git",
+                    "tag": "0.2.7"
                 }
             ]
         },
