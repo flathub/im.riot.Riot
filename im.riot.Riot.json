@@ -131,8 +131,8 @@
                     "only-arches": [
                         "x86_64"
                     ],
-                    "url": "https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.25_amd64.deb",
-                    "sha256": "1487cc34a8b4debbb11847781e4d6f39288a01a03064f26bf54d66486a7278b7",
+                    "url": "https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.26_amd64.deb",
+                    "sha256": "b752d1ffe49b5ff5801c565cf5432b2dc0f49c3f213df8645f191c9971e4e5d8",
                     "x-checker-data": {
                         "type": "debian-repo",
                         "package-name": "element-desktop",
