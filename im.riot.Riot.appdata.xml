@@ -3,10 +3,13 @@
   <id>im.riot.Riot.desktop</id>
   <name>Element</name>
   <project_license>Apache-2.0</project_license>
-  <developer_name>New Vector Ltd</developer_name>
+  <developer_name>Element Software, Inc.</developer_name>
   <summary>Create, share, communicate, chat and call securely, and bridge to other apps</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <url type="homepage">https://element.io/</url>
+  <url type="faq">https://github.com/flathub/im.riot.Riot/</url>
+  <url type="bugtracker">https://github.com/flathub/im.riot.Riot/issues</url>
+  <url type="help">https://element.io/help</url>
   <description>
     <p>More than group chat: communication</p>
     <ul>
@@ -16,9 +19,7 @@
       <li>Grab the attention of your colleague by calling out their name and don’t miss a thing with keyword alerts.</li>
       <li>Deploy bots for fun or practical use with our integrations store.</li>
     </ul>
-    <p>Preliminary Wayland support since 1.7.25.</p>
-    <p>To try running Element natively under Wayland, run: <code>flatpak run --socket=wayland --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland im.riot.Riot</code></p>
-    <p>For GNOME, window decorations are currently missing and you'll have to use keyboard shortcuts instead to resize the window.</p>
+    <p>NOTE: the Flathub distribution of Element is community maintained and not affiliated with or officially supported by Element Software, Inc. The Flathub distribution of Element has several known known issues, including broken functionality. To install the officially supported version of Element (Debian/Ubuntu only), visit the page labeled "Homepage". For known issues and experimental features, visit the pages labeled "Bugtracker" and "FAQ". Please do not report bugs to the upstream Element maintainers unless you can consistently reproduce them on the official distribution.</p>
   </description>
   <screenshots>
     <screenshot>
