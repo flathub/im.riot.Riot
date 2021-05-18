@@ -17,7 +17,8 @@
       <li>Deploy bots for fun or practical use with our integrations store.</li>
     </ul>
     <p>Preliminary Wayland support since 1.7.25.</p>
-    <p>To try running Element natively under Wayland, run: <code>flatpak run --socket=wayland --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland im.riot.Riot</code></p>
+    <p>To try running Element natively under Wayland, run:</p>
+    <p>flatpak run --socket=wayland --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland im.riot.Riot</p>
     <p>For GNOME, window decorations are currently missing and you'll have to use keyboard shortcuts instead to resize the window.</p>
   </description>
   <screenshots>
