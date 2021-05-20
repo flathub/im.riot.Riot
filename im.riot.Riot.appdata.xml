@@ -7,6 +7,8 @@
   <summary>Create, share, communicate, chat and call securely, and bridge to other apps</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <url type="homepage">https://element.io/</url>
+  <url type="help">https://element.io/help</url>
+  <url type="translate">https://translate.element.io/</url>
   <description>
     <p>More than group chat: communication</p>
     <ul>
