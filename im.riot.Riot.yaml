@@ -58,9 +58,10 @@ modules:
     cleanup:
       - "*"
     sources:
-      - type: archive
-        url: https://downloads.sourceforge.net/sourceforge/tcl/tcl8.6.10-src.tar.gz
-        sha256: 5196dbf6638e3df8d5c87b5815c8c2b758496eb6f0e41446596c9a4e638d87ed
+      - type: git
+        url: https://github.com/tcltk/tcl.git
+        tag: core-8-6-10
+        commit: 1c71c8f4dd76c373046910c03caa4e6a29073913
   - name: sqlcipher
     rm-configure: true
     config-opts:
