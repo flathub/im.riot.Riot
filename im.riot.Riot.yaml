@@ -1,0 +1,131 @@
+---
+app-id: im.riot.Riot
+base: org.electronjs.Electron2.BaseApp
+base-version: '20.08'
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+command: element
+rename-icon: element-desktop
+copy-icon: true
+separate-locales: false
+finish-args:
+  # Required due to being a GUI application
+  - "--socket=x11"
+  # Required to make sure x11 performance is achived on all platforms
+  # At least that's what the legends tell. it might be worth experimenting
+  # with dropping this permission.
+  - "--share=ipc"
+  # Required for experimental wayland support
+  - "--socket=wayland"
+  # Required to provide Call functionality
+  - "--socket=pulseaudio"
+  - "--device=all"
+  # As a chat application, networking is required
+  - "--share=network"
+  # Allows to send and receive files in the Downloads directory
+  # Required until Electron supports portals for load and safe dialogs
+  - "--filesystem=xdg-download"
+  # Required for notifications in various desktop environments
+  - "--talk-name=org.freedesktop.Notifications"
+  - "--talk-name=org.kde.StatusNotifierWatcher"
+  # Required due to KDE's special way of handling notifications
+  - "--own-name=org.kde.StatusNotifierItem-2-1"
+  # Required for advanced input methods e.g. writing CJK languages
+  - "--talk-name=org.freedesktop.portal.Fcitx"
+  # Required to store access tokens (persistent logins)
+  - "--filesystem=xdg-run/keyring"
+  # Required for experimental wayland support
+  - "--filesystem=xdg-run/pipewire-0"
+cleanup:
+  - "/include"
+  - "/lib/pkgconfig"
+  - "/lib/*.la"
+  - "/lib/*.a"
+  - "/share/pkgconfig"
+  - "/share/aclocal"
+  - "/share/gtk-doc"
+  - "/share/doc"
+  - "/share/info"
+  - "/share/man"
+  - "/man"
+modules:
+  - shared-modules/libsecret/libsecret.json
+  - name: tcl
+    subdir: unix
+    build-options:
+      no-debuginfo: true
+    cleanup:
+      - "*"
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/sourceforge/tcl/tcl8.6.10-src.tar.gz
+        sha256: 5196dbf6638e3df8d5c87b5815c8c2b758496eb6f0e41446596c9a4e638d87ed
+  - name: sqlcipher
+    rm-configure: true
+    config-opts:
+      - "--enable-tempstore=yes"
+      - "--disable-tcl"
+    build-options:
+      cflags: "-DSQLITE_HAS_CODEC"
+      ldflags: "-lcrypto"
+    sources:
+      - type: archive
+        url: https://github.com/sqlcipher/sqlcipher/archive/v4.3.0.tar.gz
+        sha256: fccb37e440ada898902b294d02cde7af9e8706b185d77ed9f6f4d5b18b4c305f
+      - type: shell
+        commands:
+          - cp -p /usr/share/automake-*/config.{sub,guess} .
+      - type: script
+        dest-filename: autogen.sh
+        commands:
+          - AUTOMAKE="automake --foreign" autoreconf -vfi
+  - name: pipewire
+    buildsystem: meson
+    config-opts:
+      - "-Dgstreamer=disabled"
+      - "-Dman=false"
+      - "-Dsystemd=false"
+    cleanup:
+      - "/include"
+      - "/bin"
+      - "/etc"
+      - "/lib/pkgconfig"
+    sources:
+      - type: git
+        url: https://github.com/PipeWire/pipewire.git
+        tag: 0.2.7
+  - name: riot
+    buildsystem: simple
+    build-commands:
+      - ar x element-desktop_*.deb
+      - rm element-desktop_*.deb
+      - tar xf data.tar.xz
+      - cp -r 'opt/Element' /app/Element
+      - mkdir -p /app/share/icons/hicolor
+      - cp -r usr/share/icons/hicolor/* /app/share/icons/hicolor
+      - chmod -R a-s,go+rX,go-w "/app/Element"
+      - install element.sh /app/bin/element
+      - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
+      - install -Dm644 im.riot.Riot.appdata.xml /app/share/appdata/im.riot.Riot.appdata.xml
+    sources:
+      - type: file
+        only-arches:
+          - x86_64
+        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.28_amd64.deb
+        sha256: f6afdb85f314e6102ce419f894e1f54db3159b58ddafbd887a593bc966056320
+        x-checker-data:
+          type: debian-repo
+          package-name: element-desktop
+          root: https://packages.riot.im/debian
+          dist: sid
+          component: main
+      - type: script
+        dest-filename: element.sh
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}"
+          - exec zypak-wrapper "/app/Element/element-desktop" "$@"
+      - type: file
+        path: im.riot.Riot.appdata.xml
+      - type: file
+        path: im.riot.Riot.desktop
