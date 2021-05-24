@@ -1,4 +1,3 @@
----
 app-id: im.riot.Riot
 base: org.electronjs.Electron2.BaseApp
 base-version: '20.08'
@@ -11,44 +10,44 @@ copy-icon: true
 separate-locales: false
 finish-args:
   # Required due to being a GUI application
-  - "--socket=x11"
+  - --socket=x11
   # Required to make sure x11 performance is achived on all platforms
   # At least that's what the legends tell. it might be worth experimenting
   # with dropping this permission.
-  - "--share=ipc"
+  - --share=ipc
   # Required for experimental wayland support
-  - "--socket=wayland"
+  - --socket=wayland
   # Required to provide Call functionality
-  - "--socket=pulseaudio"
-  - "--device=all"
+  - --socket=pulseaudio
+  - --device=all
   # As a chat application, networking is required
-  - "--share=network"
+  - --share=network
   # Allows to send and receive files in the Downloads directory
   # Required until Electron supports portals for load and safe dialogs
-  - "--filesystem=xdg-download"
+  - --filesystem=xdg-download
   # Required for notifications in various desktop environments
-  - "--talk-name=org.freedesktop.Notifications"
-  - "--talk-name=org.kde.StatusNotifierWatcher"
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
   # Required due to KDE's special way of handling notifications
-  - "--own-name=org.kde.StatusNotifierItem-2-1"
+  - --own-name=org.kde.StatusNotifierItem-2-1
   # Required for advanced input methods e.g. writing CJK languages
-  - "--talk-name=org.freedesktop.portal.Fcitx"
+  - --talk-name=org.freedesktop.portal.Fcitx
   # Required to store access tokens (persistent logins)
-  - "--filesystem=xdg-run/keyring"
+  - --filesystem=xdg-run/keyring
   # Required for experimental wayland support
-  - "--filesystem=xdg-run/pipewire-0"
+  - --filesystem=xdg-run/pipewire-0
 cleanup:
-  - "/include"
-  - "/lib/pkgconfig"
-  - "/lib/*.la"
-  - "/lib/*.a"
-  - "/share/pkgconfig"
-  - "/share/aclocal"
-  - "/share/gtk-doc"
-  - "/share/doc"
-  - "/share/info"
-  - "/share/man"
-  - "/man"
+  - /include
+  - /lib/pkgconfig
+  - /lib/*.la
+  - /lib/*.a
+  - /share/pkgconfig
+  - /share/aclocal
+  - /share/gtk-doc
+  - /share/doc
+  - /share/info
+  - /share/man
+  - /man
 modules:
   - shared-modules/libsecret/libsecret.json
   - name: tcl
@@ -56,7 +55,7 @@ modules:
     build-options:
       no-debuginfo: true
     cleanup:
-      - "*"
+      - '*'
     sources:
       - type: archive
         url: https://downloads.sourceforge.net/sourceforge/tcl/tcl8.6.10-src.tar.gz
@@ -64,11 +63,11 @@ modules:
   - name: sqlcipher
     rm-configure: true
     config-opts:
-      - "--enable-tempstore=yes"
-      - "--disable-tcl"
+      - --enable-tempstore=yes
+      - --disable-tcl
     build-options:
-      cflags: "-DSQLITE_HAS_CODEC"
-      ldflags: "-lcrypto"
+      cflags: -DSQLITE_HAS_CODEC
+      ldflags: -lcrypto
     sources:
       - type: archive
         url: https://github.com/sqlcipher/sqlcipher/archive/v4.3.0.tar.gz
@@ -83,14 +82,14 @@ modules:
   - name: pipewire
     buildsystem: meson
     config-opts:
-      - "-Dgstreamer=disabled"
-      - "-Dman=false"
-      - "-Dsystemd=false"
+      - -Dgstreamer=disabled
+      - -Dman=false
+      - -Dsystemd=false
     cleanup:
-      - "/include"
-      - "/bin"
-      - "/etc"
-      - "/lib/pkgconfig"
+      - /include
+      - /bin
+      - /etc
+      - /lib/pkgconfig
     sources:
       - type: git
         url: https://github.com/PipeWire/pipewire.git
@@ -112,8 +111,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.28_amd64.deb
-        sha256: f6afdb85f314e6102ce419f894e1f54db3159b58ddafbd887a593bc966056320
+        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.29_amd64.deb
+        sha256: f502b2c6a98610c4f30af445583ccb056610f658ad57c8a21ed62e28376735f3
         x-checker-data:
           type: debian-repo
           package-name: element-desktop
