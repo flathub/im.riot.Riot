@@ -107,7 +107,7 @@ modules:
       - chmod -R a-s,go+rX,go-w "/app/Element"
       - install element.sh /app/bin/element
       - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
-      - install -Dm644 im.riot.Riot.appdata.xml /app/share/appdata/im.riot.Riot.appdata.xml
+      - install -Dm644 im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
     sources:
       - type: file
         only-arches:
@@ -126,6 +126,6 @@ modules:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}"
           - exec zypak-wrapper "/app/Element/element-desktop" "$@"
       - type: file
-        path: im.riot.Riot.appdata.xml
+        path: im.riot.Riot.metainfo.xml
       - type: file
         path: im.riot.Riot.desktop
