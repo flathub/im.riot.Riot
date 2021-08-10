@@ -60,7 +60,7 @@ modules:
       - type: git
         url: https://github.com/tcltk/tcl.git
         tag: core-8-6-11
-        commit: 590390207d727708be57b4908eb24dbe705d090c
+        commit: 17b5b3e0201cdf92d3c125776e1b2dd453f225bd
   - name: sqlcipher
     rm-configure: true
     config-opts:
