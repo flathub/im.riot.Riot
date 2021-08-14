@@ -16,7 +16,7 @@ finish-args:
   # with dropping this permission.
   - --share=ipc
   # Required for experimental wayland support
-  - --socket=wayland
+  # - --socket=wayland
   # Required to provide Call functionality
   - --socket=pulseaudio
   - --device=all
@@ -149,8 +149,10 @@ modules:
 
       - HOME=$PWD yarn --offline config set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
       - yarn --offline
-      - yarn --offline build
+      - yarn --offline run build
+      - mkdir -p /app/main/resources
       - cp config.sample.json webapp/config.json
+      - cp -r webapp /app/main/resources/
     sources:
       - type: git
         url: https://github.com/vector-im/element-web.git
@@ -175,7 +177,7 @@ modules:
         CC: ccache gcc
     subdir: main
     build-commands:
-      - ln -s ../element-web/webapp ./
+      - ln -s /app/main/resources/webapp ./
 
       # put --offline option to yarn
       - sed -i 's/yarn/yarn --offline/g' package.json
@@ -191,14 +193,14 @@ modules:
       - HOME=$PWD yarn config --offline set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
       - yarn --offline
       - yarn --offline run i18n
-      - yarn --offline run asar-webapp
+      # - yarn --offline run asar-webapp
       - yarn --offline run build:ts
       - yarn --offline run build:res
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
         yarn --offline run electron-builder --linux dir -c.linux.target=dir $ELECTRON_BUILDER_ARCH_ARGS
 
-      - cp -r dist/linux*unpacked /app/main
+      - cp -r dist/linux*unpacked/* /app/main
       - install -Dm 755 -t /app/bin/ ../run.sh
       - for size in 16 24 48 64 96 128 256 512; do [[ -e "build/icons/${size}x${size}.png" ]] && install
         -Dm644 "build/icons/${size}x${size}.png" "/app/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png";
