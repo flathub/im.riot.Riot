@@ -7,13 +7,11 @@ sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node14
 command: run.sh
-rename-icon: element-desktop
-copy-icon: true
 separate-locales: false
 finish-args:
   # Required due to being a GUI application
   - --socket=x11
-  # Required to make sure x11 performance is achived on all platforms
+  # Required to make sure x11 performance is achieved on all platforms
   # At least that's what the legends tell. it might be worth experimenting
   # with dropping this permission.
   - --share=ipc
@@ -134,14 +132,9 @@ modules:
     build-options:
       append-path: /usr/lib/sdk/node14/bin:/app/yarn/bin
       env:
-        # DEBUG: electron-builder
-        # ELECTRON_CACHE: /run/build/element-web/flatpak-node/electron-cache
         XDG_CACHE_HOME: /run/build/element-web/flatpak-node/cache
-        # npm_config_target: 12.0.0
         npm_config_nodedir: /usr/lib/sdk/node14
-        # npm_config_cache: /run/build/element-web/flatpak-node/npm-cache
         npm_config_offline: "true"
-        # npm_config_no_save: "true"
         NPM_CONFIG_LOGLEVEL: verbose
         CXX: ccache g++
         CC: ccache gcc
@@ -157,8 +150,7 @@ modules:
       - HOME=$PWD yarn --offline config set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
       - yarn --offline
       - yarn --offline build
-      - mkdir -p /app/main/webapp
-      - cp -r webapp /app/main/webapp
+      - cp config.sample.json webapp/config.json
     sources:
       - type: git
         url: https://github.com/vector-im/element-web.git
@@ -175,24 +167,22 @@ modules:
     build-options:
       append-path: /usr/lib/sdk/node14/bin:/app/yarn/bin
       env:
-        # DEBUG: electron-builder
-        # ELECTRON_CACHE: /run/build/element-desktop/flatpak-node/cache/electron
         XDG_CACHE_HOME: /run/build/element-desktop/flatpak-node/cache
-        npm_config_target: 12.0.0
-        npm_config_nodedir: /run/build/element-desktop/flatpak-node/cache/node-gyp/12.0.0
-        # npm_config_nodedir: /usr/lib/sdk/node14
-        npm_config_cache: /run/build/element-desktop/flatpak-node/npm-cache
+        npm_config_nodedir: /usr/lib/sdk/node14
         npm_config_offline: "true"
-        npm_config_no_save: "true"
         npm_config_loglevel: verbose
         CXX: ccache g++
         CC: ccache gcc
     subdir: main
     build-commands:
-      - ln -s /app/main/webapp ./
+      - ln -s ../element-web/webapp ./
 
       # put --offline option to yarn
       - sed -i 's/yarn/yarn --offline/g' package.json
+
+      # Patch the electronVersion to build with to match the minimum version in the dependency list.
+      - |
+        sed -i 's/"electronVersion": "13.1.6"/"electronVersion": "13.1.7"/' package.json
 
       # Rebuild native modules by electron-rebuild
       # https://github.com/electron-userland/electron-builder/issues/4100
@@ -200,19 +190,21 @@ modules:
 
       - HOME=$PWD yarn config --offline set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
       - yarn --offline
-
-      # - yarn --offline compile
+      - yarn --offline run i18n
+      - yarn --offline run asar-webapp
+      - yarn --offline run build:ts
+      - yarn --offline run build:res
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
-        yarn --offline run build -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir
-      # yarn --offline run build electron-builder --linux dir -c.linux.target=dir $ELECTRON_BUILDER_ARCH_ARGS
+        yarn --offline run electron-builder --linux dir -c.linux.target=dir $ELECTRON_BUILDER_ARCH_ARGS
 
       - cp -r dist/linux*unpacked /app/main
       - install -Dm 755 -t /app/bin/ ../run.sh
-      - mkdir -p /app/share/icons/hicolor
-      - cp -r usr/share/icons/hicolor/* /app/share/icons/hicolor
-      - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
-      - install -Dm644 im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
+      - for size in 16 24 48 64 96 128 256 512; do [[ -e "build/icons/${size}x${size}.png" ]] && install
+        -Dm644 "build/icons/${size}x${size}.png" "/app/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png";
+        done
+      - install -Dm644 ../im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
+      - install -Dm644 ../im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
     sources:
       - type: git
         url: https://github.com/vector-im/element-desktop.git
