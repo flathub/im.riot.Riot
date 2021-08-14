@@ -1,10 +1,12 @@
 app-id: im.riot.Riot
 base: org.electronjs.Electron2.BaseApp
-base-version: '20.08'
+base-version: "20.08"
 runtime: org.freedesktop.Platform
-runtime-version: '20.08'
+runtime-version: "20.08"
 sdk: org.freedesktop.Sdk
-command: element
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.node14
+command: run.sh
 rename-icon: element-desktop
 copy-icon: true
 separate-locales: false
@@ -113,36 +115,122 @@ modules:
           project-id: 57357
           stable-only: true
           tag-template: $version
+  - name: yarn
     buildsystem: simple
     build-commands:
-      - ar x element-desktop_*.deb
-      - rm element-desktop_*.deb
-      - tar xf data.tar.xz
-      - cp -r 'opt/Element' /app/Element
+      - cp -a * /app
+    cleanup:
+      - "*"
+    sources:
+      - type: archive
+        url: https://github.com/yarnpkg/yarn/releases/download/v1.22.11/yarn-v1.22.11.tar.gz
+        sha256: 2c320de14a6014f62d29c34fec78fdbb0bc71c9ccba48ed0668de452c1f5fe6c
+        x-checker-data:
+          type: anitya
+          project-id: 13363
+          url-template: https://github.com/yarnpkg/yarn/releases/download/$version/yarn-v$version.tar.gz
+  - name: element-web
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/node14/bin:/app/yarn/bin
+      env:
+        # DEBUG: electron-builder
+        # ELECTRON_CACHE: /run/build/element-web/flatpak-node/electron-cache
+        XDG_CACHE_HOME: /run/build/element-web/flatpak-node/cache
+        # npm_config_target: 12.0.0
+        npm_config_nodedir: /usr/lib/sdk/node14
+        # npm_config_cache: /run/build/element-web/flatpak-node/npm-cache
+        npm_config_offline: "true"
+        # npm_config_no_save: "true"
+        NPM_CONFIG_LOGLEVEL: verbose
+        CXX: ccache g++
+        CC: ccache gcc
+    subdir: main
+    build-commands:
+      # put --offline option to yarn
+      - sed -i 's/yarn/yarn --offline/g' package.json
+
+      # Rebuild native modules by electron-rebuild
+      # https://github.com/electron-userland/electron-builder/issues/4100
+      - sed -i 's/"build":\ {/"build":\ {\n"npmRebuild":\ false,/' package.json
+
+      - HOME=$PWD yarn --offline config set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
+      - yarn --offline
+      - yarn --offline build
+      - mkdir -p /app/main/webapp
+      - cp -r webapp /app/main/webapp
+    sources:
+      - type: git
+        url: https://github.com/vector-im/element-web.git
+        tag: v1.7.34
+        commit: 245d13875faaecb7c3fec2df112bf3a7a6e8fec9
+        dest: main
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\\d.]+)$
+          version-scheme: semantic
+      - generated-sources-web.json
+  - name: element-desktop
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/node14/bin:/app/yarn/bin
+      env:
+        # DEBUG: electron-builder
+        # ELECTRON_CACHE: /run/build/element-desktop/flatpak-node/cache/electron
+        XDG_CACHE_HOME: /run/build/element-desktop/flatpak-node/cache
+        npm_config_target: 12.0.0
+        npm_config_nodedir: /run/build/element-desktop/flatpak-node/cache/node-gyp/12.0.0
+        # npm_config_nodedir: /usr/lib/sdk/node14
+        npm_config_cache: /run/build/element-desktop/flatpak-node/npm-cache
+        npm_config_offline: "true"
+        npm_config_no_save: "true"
+        npm_config_loglevel: verbose
+        CXX: ccache g++
+        CC: ccache gcc
+    subdir: main
+    build-commands:
+      - ln -s /app/main/webapp ./
+
+      # put --offline option to yarn
+      - sed -i 's/yarn/yarn --offline/g' package.json
+
+      # Rebuild native modules by electron-rebuild
+      # https://github.com/electron-userland/electron-builder/issues/4100
+      - sed -i 's/"build":\ {/"build":\ {\n"npmRebuild":\ false,/' package.json
+
+      - HOME=$PWD yarn config --offline set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
+      - yarn --offline
+
+      # - yarn --offline compile
+      - |
+        . ../flatpak-node/electron-builder-arch-args.sh
+        yarn --offline run build -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir
+      # yarn --offline run build electron-builder --linux dir -c.linux.target=dir $ELECTRON_BUILDER_ARCH_ARGS
+
+      - cp -r dist/linux*unpacked /app/main
+      - install -Dm 755 -t /app/bin/ ../run.sh
       - mkdir -p /app/share/icons/hicolor
       - cp -r usr/share/icons/hicolor/* /app/share/icons/hicolor
-      - chmod -R a-s,go+rX,go-w "/app/Element"
-      - install element.sh /app/bin/element
       - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
       - install -Dm644 im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
     sources:
-      - type: file
-        only-arches:
-          - x86_64
-        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.34_amd64.deb
-        sha256: 97c3ca75fe00c77837b3289d9b1b863a547f54f0fc1a4f378dcffe11a90d8a95
+      - type: git
+        url: https://github.com/vector-im/element-desktop.git
+        tag: v1.7.34
+        commit: 4ceb91b3aee13c58d90a1c220342c88e044924fc
+        dest: main
         x-checker-data:
-          type: debian-repo
-          package-name: element-desktop
-          root: https://packages.riot.im/debian
-          dist: sid
-          component: main
+          type: git
+          tag-pattern: ^v([\\d.]+)$
+          version-scheme: semantic
       - type: script
-        dest-filename: element.sh
+        dest-filename: run.sh
         commands:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}"
-          - exec zypak-wrapper "/app/Element/element-desktop" "$@"
+          - if test -n "$WAYLAND_DISPLAY" && test -e "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"; then set -- --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"; fi
+          - zypak-wrapper.sh /app/main/element-desktop "$@"
       - type: file
         path: im.riot.Riot.metainfo.xml
       - type: file
         path: im.riot.Riot.desktop
+      - generated-sources-desktop.json

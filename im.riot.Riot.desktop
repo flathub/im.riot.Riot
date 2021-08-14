@@ -2,7 +2,7 @@
 Type=Application
 Name=Element
 Icon=im.riot.Riot
-Exec=/app/bin/element %U
+Exec=/app/bin/run.sh %U
 Categories=Network;InstantMessaging;Chat;VideoConference;
 MimeType=x-scheme-handler/element;
 StartupWMClass=element
