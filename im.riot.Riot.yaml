@@ -80,6 +80,11 @@ modules:
       - type: archive
         url: https://github.com/sqlcipher/sqlcipher/archive/v4.3.0.tar.gz
         sha256: fccb37e440ada898902b294d02cde7af9e8706b185d77ed9f6f4d5b18b4c305f
+        x-checker-data:
+          type: anitya
+          project-id: 11213
+          stable-only: true
+          url-template: https://github.com/sqlcipher/sqlcipher/archive/v$version.tar.gz
       - type: shell
         commands:
           - cp -p /usr/share/automake-*/config.{sub,guess} .
@@ -102,7 +107,12 @@ modules:
       - type: git
         url: https://github.com/PipeWire/pipewire.git
         tag: 0.2.7
-  - name: riot
+        commit: 14c11c0fe4d366bad4cfecdee97b6652ff9ed63d
+        x-checker-data:
+          type: anitya
+          project-id: 57357
+          stable-only: true
+          tag-template: $version
     buildsystem: simple
     build-commands:
       - ar x element-desktop_*.deb
