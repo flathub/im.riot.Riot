@@ -128,7 +128,7 @@ modules:
         x-checker-data:
           type: anitya
           project-id: 13363
-          url-template: https://github.com/yarnpkg/yarn/releases/download/$version/yarn-v$version.tar.gz
+          url-template: https://github.com/yarnpkg/yarn/releases/download/v$version/yarn-v$version.tar.gz
 
   - name: element-web
     buildsystem: simple
@@ -153,9 +153,11 @@ modules:
         commit: 245d13875faaecb7c3fec2df112bf3a7a6e8fec9
         dest: main
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\\d.]+)$
-          version-scheme: semantic
+          type: json
+          url: https://api.github.com/repos/vector-im/element-web/releases/latest
+          tag-query: .tag_name
+          version-query: .tag_name | sub("^v"; "")
+          timestamp-query: .published_at
 
       - type: file
         url: data:yarn-offline-mirror%20/run/build/element-web/flatpak-node/yarn-mirror%0A--install.offline%20true%0A--run.offline%20true%0A
@@ -200,9 +202,11 @@ modules:
         commit: 4ceb91b3aee13c58d90a1c220342c88e044924fc
         dest: main
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\\d.]+)$
-          version-scheme: semantic
+          type: json
+          url: https://api.github.com/repos/vector-im/element-desktop/releases/latest
+          tag-query: .tag_name
+          version-query: .tag_name | sub("^v"; "")
+          timestamp-query: .published_at
 
       - type: file
         url: data:yarn-offline-mirror%20/run/build/element-desktop/flatpak-node/yarn-mirror%0A--install.offline%20true%0A--run.offline%20true%0A
