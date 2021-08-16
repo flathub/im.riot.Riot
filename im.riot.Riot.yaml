@@ -60,7 +60,7 @@ modules:
       - type: git
         url: https://github.com/tcltk/tcl.git
         tag: core-8-6-11
-        commit: 590390207d727708be57b4908eb24dbe705d090c
+        commit: 17b5b3e0201cdf92d3c125776e1b2dd453f225bd
   - name: sqlcipher
     rm-configure: true
     config-opts:
@@ -112,8 +112,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.7.34_amd64.deb
-        sha256: 97c3ca75fe00c77837b3289d9b1b863a547f54f0fc1a4f378dcffe11a90d8a95
+        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.8.0_amd64.deb
+        sha256: 926ae86dd9b770d562d690d19893f8c3a2b896327acf836e57cd0a9783579509
         x-checker-data:
           type: debian-repo
           package-name: element-desktop
