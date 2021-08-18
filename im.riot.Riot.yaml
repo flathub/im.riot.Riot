@@ -197,9 +197,9 @@ modules:
       - install -Dm644 ../im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
     sources:
       - type: git
-        url: https://github.com/vector-im/element-desktop.git
-        tag: v1.7.34
-        commit: 4ceb91b3aee13c58d90a1c220342c88e044924fc
+        url: https://github.com/SimonBrandner/element-desktop
+        #tag: v1.7.34
+        commit: 96203a882ce3fa32445213a5eb1755990a81657d
         dest: main
         x-checker-data:
           type: json
