@@ -9,8 +9,8 @@ sdk-extensions:
 command: run.sh
 separate-locales: false
 finish-args:
-  # Required due to being a GUI application
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   # Required to make sure x11 performance is achieved on all platforms
   # At least that's what the legends tell. it might be worth experimenting
   # with dropping this permission.
@@ -219,7 +219,7 @@ modules:
         dest-filename: run.sh
         commands:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}"
-          - if test -n "$WAYLAND_DISPLAY" && test -e "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"; then set -- --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"; fi
+          - if test -n "$WAYLAND_DISPLAY" && test -e "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" && [ "$DESKTOP_SESSION" != "gnome" ]; then set -- --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"; fi
           - zypak-wrapper.sh /app/main/element-desktop "$@"
       - type: file
         path: im.riot.Riot.metainfo.xml
