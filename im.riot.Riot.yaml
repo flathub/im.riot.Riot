@@ -98,8 +98,8 @@ modules:
   - name: riot
     buildsystem: simple
     build-commands:
-      - ar x element-desktop_*.deb
-      - rm element-desktop_*.deb
+      - ar x element-nightly*.deb
+      - rm element-nightly_*.deb
       - tar xf data.tar.xz
       - cp -r 'opt/Element' /app/Element
       - mkdir -p /app/share/icons/hicolor
