@@ -48,6 +48,7 @@ cleanup:
   - /man
 modules:
   - shared-modules/libsecret/libsecret.json
+
   - name: tcl
     buildsystem: autotools
     subdir: unix
@@ -66,6 +67,7 @@ modules:
           project-id: 4941
           stable-only: true
           url-template: https://prdownloads.sourceforge.net/tcl/tcl$version-src.tar.gz
+
   - name: sqlcipher
     rm-configure: true
     config-opts:
@@ -90,6 +92,7 @@ modules:
         dest-filename: autogen.sh
         commands:
           - AUTOMAKE="automake --foreign" autoreconf -vfi
+
   - name: pipewire
     buildsystem: meson
     config-opts:
@@ -111,6 +114,7 @@ modules:
           project-id: 57357
           stable-only: true
           tag-template: $version
+
   - name: yarn
     buildsystem: simple
     build-commands:
@@ -124,32 +128,23 @@ modules:
         x-checker-data:
           type: anitya
           project-id: 13363
-          url-template: https://github.com/yarnpkg/yarn/releases/download/$version/yarn-v$version.tar.gz
+          url-template: https://github.com/yarnpkg/yarn/releases/download/v$version/yarn-v$version.tar.gz
+
   - name: element-web
     buildsystem: simple
     build-options:
       append-path: /usr/lib/sdk/node14/bin:/app/yarn/bin
       env:
         XDG_CACHE_HOME: /run/build/element-web/flatpak-node/cache
-        npm_config_nodedir: /usr/lib/sdk/node14
         npm_config_offline: "true"
         NPM_CONFIG_LOGLEVEL: verbose
         CXX: ccache g++
         CC: ccache gcc
     subdir: main
     build-commands:
-      # put --offline option to yarn
-      - sed -i 's/yarn/yarn --offline/g' package.json
-
-      # Rebuild native modules by electron-rebuild
-      # https://github.com/electron-userland/electron-builder/issues/4100
-      - sed -i 's/"build":\ {/"build":\ {\n"npmRebuild":\ false,/' package.json
-
-      - HOME=$PWD yarn --offline config set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
-      - yarn --offline
-      - yarn --offline run build
+      - yarn
+      - yarn run build
       - mkdir -p /app/main/resources
-      - cp config.sample.json webapp/config.json
       - cp -r webapp /app/main/resources/
     sources:
       - type: git
@@ -158,45 +153,40 @@ modules:
         commit: 245d13875faaecb7c3fec2df112bf3a7a6e8fec9
         dest: main
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\\d.]+)$
-          version-scheme: semantic
+          type: json
+          url: https://api.github.com/repos/vector-im/element-web/releases/latest
+          tag-query: .tag_name
+          version-query: .tag_name | sub("^v"; "")
+          timestamp-query: .published_at
+
+      - type: file
+        url: data:yarn-offline-mirror%20/run/build/element-web/flatpak-node/yarn-mirror%0A--install.offline%20true%0A--run.offline%20true%0A
+        dest: main
+        dest-filename: .yarnrc
+
       - generated-sources-web.json
+
   - name: element-desktop
     buildsystem: simple
     build-options:
       append-path: /usr/lib/sdk/node14/bin:/app/yarn/bin
       env:
         XDG_CACHE_HOME: /run/build/element-desktop/flatpak-node/cache
-        npm_config_nodedir: /usr/lib/sdk/node14
         npm_config_offline: "true"
         npm_config_loglevel: verbose
-        CXX: ccache g++
-        CC: ccache gcc
     subdir: main
     build-commands:
-      - ln -s /app/main/resources/webapp ./
-
-      # put --offline option to yarn
-      - sed -i 's/yarn/yarn --offline/g' package.json
-
       # Patch the electronVersion to build with to match the minimum version in the dependency list.
-      - |
-        sed -i 's/"electronVersion": "13.1.6"/"electronVersion": "13.1.7"/' package.json
+      - jq 'del(.build.electronVersion)' <<<$(cat package.json) > package.json
 
-      # Rebuild native modules by electron-rebuild
-      # https://github.com/electron-userland/electron-builder/issues/4100
-      - sed -i 's/"build":\ {/"build":\ {\n"npmRebuild":\ false,/' package.json
-
-      - HOME=$PWD yarn config --offline set yarn-offline-mirror $FLATPAK_BUILDER_BUILDDIR/flatpak-node/yarn-mirror
-      - yarn --offline
-      - yarn --offline run i18n
-      # - yarn --offline run asar-webapp
-      - yarn --offline run build:ts
-      - yarn --offline run build:res
+      - yarn
+      - yarn run i18n
+      # - yarn run asar-webapp
+      - yarn run build:ts
+      - yarn run build:res
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
-        yarn --offline run electron-builder --linux dir -c.linux.target=dir $ELECTRON_BUILDER_ARCH_ARGS
+        yarn run electron-builder --linux dir -c.linux.target=dir $ELECTRON_BUILDER_ARCH_ARGS
 
       - cp -r dist/linux*unpacked/* /app/main
       - install -Dm 755 -t /app/bin/ ../run.sh
@@ -212,17 +202,28 @@ modules:
         commit: 4ceb91b3aee13c58d90a1c220342c88e044924fc
         dest: main
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\\d.]+)$
-          version-scheme: semantic
+          type: json
+          url: https://api.github.com/repos/vector-im/element-desktop/releases/latest
+          tag-query: .tag_name
+          version-query: .tag_name | sub("^v"; "")
+          timestamp-query: .published_at
+
+      - type: file
+        url: data:yarn-offline-mirror%20/run/build/element-desktop/flatpak-node/yarn-mirror%0A--install.offline%20true%0A--run.offline%20true%0A
+        dest: main
+        dest-filename: .yarnrc
+
+      - generated-sources-desktop.json
+
       - type: script
         dest-filename: run.sh
         commands:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}"
           - if test -n "$WAYLAND_DISPLAY" && test -e "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" && [ "$DESKTOP_SESSION" != "gnome" ]; then set -- --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"; fi
           - zypak-wrapper.sh /app/main/element-desktop "$@"
+
       - type: file
         path: im.riot.Riot.metainfo.xml
+
       - type: file
         path: im.riot.Riot.desktop
-      - generated-sources-desktop.json
