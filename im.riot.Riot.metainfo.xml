@@ -20,7 +20,7 @@
     </ul>
     <p>Preliminary Wayland support since 1.7.25.</p>
     <p>To try running Element natively under Wayland, run:</p>
-    <p>flatpak run im.riot.Riot --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland</p>
+    <p>flatpak run im.riot.Riot --enable-features=UseOzonePlatform --ozone-platform=wayland</p>
     <p>For GNOME, window decorations are currently missing and you'll have to use keyboard shortcuts instead to resize the window.</p>
   </description>
   <screenshots>
