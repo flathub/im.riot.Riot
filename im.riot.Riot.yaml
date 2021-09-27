@@ -97,8 +97,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.8.5_amd64.deb
-        sha256: 8fc09a6d3985176f864e1e517ee91abe7a9f421093b03b01f4301db4e496996f
+        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.9.0_amd64.deb
+        sha256: 7fb4783e674136fd12df0e7b630914c5991e88dc30a3d3aaefa94b236d7b7408
         x-checker-data:
           type: debian-repo
           package-name: element-desktop
