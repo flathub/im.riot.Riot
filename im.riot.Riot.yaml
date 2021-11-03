@@ -38,6 +38,10 @@ finish-args:
   - --filesystem=xdg-run/keyring
   # Required for experimental wayland support
   - --filesystem=xdg-run/pipewire-0
+  # Required for app.requestSingleInstanceLock to work 
+  # https://github.com/vector-im/element-web/issues/18625#issuecomment-958947704
+  - --env=TMPDIR=/var/tmp
+  
 cleanup:
   - /include
   - /lib/pkgconfig
