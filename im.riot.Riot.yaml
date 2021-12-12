@@ -107,11 +107,8 @@ modules:
           root: https://packages.riot.im/debian
           dist: sid
           component: main
-      - type: script
-        dest-filename: element.sh
-        commands:
-          - export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}"
-          - exec zypak-wrapper "/app/Element/element-desktop" "$@"
+      - type: file
+        path: element.sh
       - type: file
         path: im.riot.Riot.metainfo.xml
       - type: file
