@@ -99,12 +99,12 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.riot.im/debian/pool/main/e/element-desktop/element-desktop_1.9.6_amd64.deb
-        sha256: 0109e2fb3ab6369a239bcd9b8fefabff64347a284169a9f56d2314e90e004f07
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.9.7_amd64.deb
+        sha256: c8c5f7ac3990e264510e0860da7c169bb4a3b0fac8636f6a727809d9aab770eb
         x-checker-data:
           type: debian-repo
           package-name: element-desktop
-          root: https://packages.riot.im/debian
+          root: https://packages.element.io/debian
           dist: sid
           component: main
       - type: file
