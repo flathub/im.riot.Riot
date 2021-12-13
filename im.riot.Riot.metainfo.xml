@@ -30,6 +30,15 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.9.7" date="2021-12-13" urgency="high">
+      <description>
+        <p>Fix for buffer overflow in libolm and matrix-js-sdk</p>
+        <p>Fix a crash on logout</p>
+      </description>
+      <issues>
+        <issue type="cve">CVE-2021-44538</issue>
+      </issues>
+    </release>
     <release version="1.9.6" date="2021-12-06"/>
     <release version="1.9.5" date="2021-11-22"/>
     <release version="1.9.4" date="2021-11-08"/>
