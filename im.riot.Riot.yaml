@@ -4,8 +4,8 @@ base-version: '21.08'
 runtime: org.freedesktop.Platform
 runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
-command: element
-rename-icon: element-desktop
+command: element-nightly
+rename-icon: element-nightly
 copy-icon: true
 separate-locales: false
 finish-args:
@@ -85,30 +85,30 @@ modules:
   - name: riot
     buildsystem: simple
     build-commands:
-      - ar x element-desktop_*.deb
-      - rm element-desktop_*.deb
+      - ar x element-nightly_*.deb
+      - rm element-nightly_*.deb
       - tar xf data.tar.xz
-      - cp -r 'opt/Element' /app/Element
+      - cp -r 'opt/Element-Nightly' /app/Element-Nightly
       - mkdir -p /app/share/icons/hicolor
       - cp -r usr/share/icons/hicolor/* /app/share/icons/hicolor
-      - chmod -R a-s,go+rX,go-w "/app/Element"
-      - install element.sh /app/bin/element
+      - chmod -R a-s,go+rX,go-w "/app/Element-Nightly"
+      - install element-nightly.sh /app/bin/element-nightly
       - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
       - install -Dm644 im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
     sources:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.10.8_amd64.deb
-        sha256: 22c5324728198080113bb290aa3e2d9bd79a37c9bf9af47ccec4fb6952672ff4
+        url: https://packages.element.io/debian/pool/main/e/element-nightly/element-nightly_2022040701_amd64.deb
+        sha256: 869e341244c2259d7b604cb768e6836f0903e650800e203895de7a21fe73c4ca
         x-checker-data:
           type: debian-repo
-          package-name: element-desktop
+          package-name: element-nightly
           root: https://packages.element.io/debian
           dist: sid
           component: main
       - type: file
-        path: element.sh
+        path: element-nightly.sh
       - type: file
         path: im.riot.Riot.metainfo.xml
       - type: file

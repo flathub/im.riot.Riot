@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Element
+Name=Element Nightly
 Icon=im.riot.Riot
-Exec=/app/bin/element %U
+Exec=/app/bin/element-nightly %U
 Categories=Network;InstantMessaging;Chat;VideoConference;
 MimeType=x-scheme-handler/element;
-StartupWMClass=element
+StartupWMClass=element-nightly
 Keywords=Matrix;matrix.org;chat;irc;communications;talk;riot;vector;
