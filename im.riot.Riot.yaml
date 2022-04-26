@@ -50,6 +50,36 @@ cleanup:
   - /man
 modules:
   - shared-modules/libsecret/libsecret.json
+  - name: tcl
+    subdir: unix
+    build-options:
+      no-debuginfo: true
+    cleanup:
+      - '*'
+    sources:
+      - type: git
+        url: https://github.com/tcltk/tcl.git
+        tag: core-8-6-11
+        commit: 17b5b3e0201cdf92d3c125776e1b2dd453f225bd
+  - name: sqlcipher
+    rm-configure: true
+    config-opts:
+      - --enable-tempstore=yes
+      - --disable-tcl
+    build-options:
+      cflags: -DSQLITE_HAS_CODEC
+      ldflags: -lcrypto
+    sources:
+      - type: archive
+        url: https://github.com/sqlcipher/sqlcipher/archive/v4.3.0.tar.gz
+        sha256: fccb37e440ada898902b294d02cde7af9e8706b185d77ed9f6f4d5b18b4c305f
+      - type: shell
+        commands:
+          - cp -p /usr/share/automake-*/config.{sub,guess} .
+      - type: script
+        dest-filename: autogen.sh
+        commands:
+          - AUTOMAKE="automake --foreign" autoreconf -vfi
   - name: riot
     buildsystem: simple
     build-commands:
@@ -67,8 +97,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.10.11_amd64.deb
-        sha256: 3dc99c588f45e5b6aa60129ddd8b9bf6b338f23933e1109cc303a8a2126ecd33
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.10.10_amd64.deb
+        sha256: 15a25637bcb5c8ff29bae789f3d9d590299c3d591103a1fb28d20d289e7d2c74
         x-checker-data:
           type: debian-repo
           package-name: element-desktop
