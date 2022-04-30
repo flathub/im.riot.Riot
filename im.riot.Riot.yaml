@@ -99,8 +99,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/debian/pool/main/e/element-nightly/element-nightly_2022042501_amd64.deb
-        sha256: f2d9d9381986ffd305f333406b0c37323440bb9946b447da2d3125c95a4372f7
+        url: https://packages.element.io/debian/pool/main/e/element-nightly/element-nightly_2022043001_amd64.deb
+        sha256: ef9698f7f18b29b61a4689b0384a983dadb448527d997bfbbb4b3b78585b227b
         x-checker-data:
           type: debian-repo
           package-name: element-nightly
