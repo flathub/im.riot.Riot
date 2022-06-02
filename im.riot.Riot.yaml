@@ -34,6 +34,8 @@ finish-args:
   - --own-name=org.kde.StatusNotifierItem-2-1
   # Required for advanced input methods e.g. writing CJK languages
   - --talk-name=org.freedesktop.portal.Fcitx
+  # Required to store access tokens (persistent logins)
+  - --filesystem=xdg-run/keyring
   # Required for experimental wayland support
   - --filesystem=xdg-run/pipewire-0
 cleanup:
