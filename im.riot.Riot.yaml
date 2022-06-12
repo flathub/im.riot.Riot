@@ -24,7 +24,12 @@ finish-args:
   - --share=network
   # Allows to send and receive files in the Downloads directory
   # Required until Electron supports portals for load and safe dialogs
+  - --filesystem=xdg-desktop:ro
+  - --filesystem=xdg-documents:ro
   - --filesystem=xdg-download
+  - --filesystem=xdg-music:ro
+  - --filesystem=xdg-pictures:ro
+  - --filesystem=xdg-videos:ro
   # Required for notifications in various desktop environments
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
