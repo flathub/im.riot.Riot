@@ -99,8 +99,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.1_amd64.deb
-        sha256: 53cfb7cce83a9c06e8ea0d92e57cb0c999ba3387899d7fc0acd022af6f2b88cc
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.2_amd64.deb
+        sha256: ad39031b6c954ae47014f70764922b926415f2ea3c63d99eca68f858c5ee1a49
         x-checker-data:
           type: debian-repo
           package-name: element-desktop
