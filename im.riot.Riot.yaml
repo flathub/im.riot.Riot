@@ -22,14 +22,6 @@ finish-args:
   - --device=all
   # As a chat application, networking is required
   - --share=network
-  # Allows to send and receive files in the Downloads directory
-  # Required until Electron supports portals for load and safe dialogs
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-download
-  - --filesystem=xdg-music
-  - --filesystem=xdg-pictures
-  - --filesystem=xdg-videos
   # Required for notifications in various desktop environments
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
