@@ -9,6 +9,8 @@ rename-icon: element-desktop
 copy-icon: true
 separate-locales: false
 finish-args:
+  # Version required to use the document-portal v4
+  - --require-version=1.7.0
   # Required due to being a GUI application
   - --socket=x11
   # Required to make sure x11 performance is achived on all platforms
