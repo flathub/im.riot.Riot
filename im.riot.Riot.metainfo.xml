@@ -30,7 +30,19 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.11.8" date="2022-09-28"/>
+    <release version="1.11.8" date="2022-09-28" urgency="critical">
+      <description>
+        Fixes various security vulnerabilities.
+
+        Details: https://matrix.org/blog/2022/09/28/upgrade-now-to-address-encryption-vulns-in-matrix-sdks-and-clients
+      </description>
+      <issues>
+        <issue type="cve">CVE-2022-39249</issue>
+        <issue type="cve">CVE-2022-39250</issue>
+        <issue type="cve">CVE-2022-39251</issue>
+        <issue type="cve">CVE-2022-39236</issue>
+      </issues>
+    </release>
     <release version="1.11.5" date="2022-09-13"/>
     <release version="1.11.4-1" date="2022-08-31"/>
     <release version="1.11.4" date="2022-08-31"/>
