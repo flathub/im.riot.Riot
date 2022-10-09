@@ -8,6 +8,7 @@ command: element
 rename-icon: element-desktop
 copy-icon: true
 separate-locales: false
+this is just a test
 finish-args:
   # Version required to use the document-portal v4
   - --require-version=1.7.0
