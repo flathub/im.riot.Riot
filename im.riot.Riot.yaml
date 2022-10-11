@@ -29,8 +29,6 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   # Required to allow screensaver/idle inhibition such as during video calls
   - --talk-name=org.freedesktop.ScreenSaver
-  # Required due to KDE's special way of handling notifications
-  - --own-name=org.kde.StatusNotifierItem-2-1
   # Required for advanced input methods e.g. writing CJK languages
   - --talk-name=org.freedesktop.portal.Fcitx
   # Required to store access tokens (persistent logins)
