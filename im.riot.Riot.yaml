@@ -29,8 +29,6 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   # Required to allow screensaver/idle inhibition such as during video calls
   - --talk-name=org.freedesktop.ScreenSaver
-  # Required due to KDE's special way of handling notifications
-  - --own-name=org.kde.StatusNotifierItem-2-1
   # Required for advanced input methods e.g. writing CJK languages
   - --talk-name=org.freedesktop.portal.Fcitx
   # Required to store access tokens (persistent logins)
@@ -98,8 +96,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.8_amd64.deb
-        sha256: 93485bed0b17a4b0a81fea12bd2273fbe7d32abd4cea6daeded7b40a6567516d
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.10_amd64.deb
+        sha256: 9fdba0920106634ab1de4e03500fa8e61f24f86d059e67c63ba5660def8f0191
         x-checker-data:
           type: debian-repo
           package-name: element-desktop
