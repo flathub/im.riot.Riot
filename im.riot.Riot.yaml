@@ -27,6 +27,8 @@ finish-args:
   # Required for notifications in various desktop environments
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
+  # Required for tray icons on KDE
+  - --own-name=org.kde.*
   # Required to allow screensaver/idle inhibition such as during video calls
   - --talk-name=org.freedesktop.ScreenSaver
   # Required for advanced input methods e.g. writing CJK languages
