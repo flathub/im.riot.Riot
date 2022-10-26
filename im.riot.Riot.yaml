@@ -27,8 +27,25 @@ finish-args:
   # Required for notifications in various desktop environments
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
-  # Required for tray icons on KDE
-  - --own-name=org.kde.*
+  # Required for tray icons on KDE until Chromium 9585757 makes it to Electron
+  - --own-name=org.kde.StatusNotifierItem-2-1
+  - --own-name=org.kde.StatusNotifierItem-2-2
+  - --own-name=org.kde.StatusNotifierItem-2-3
+  - --own-name=org.kde.StatusNotifierItem-2-4
+  - --own-name=org.kde.StatusNotifierItem-2-5
+  - --own-name=org.kde.StatusNotifierItem-2-6
+  - --own-name=org.kde.StatusNotifierItem-2-7
+  - --own-name=org.kde.StatusNotifierItem-2-8
+  - --own-name=org.kde.StatusNotifierItem-2-9
+  - --own-name=org.kde.StatusNotifierItem-3-1
+  - --own-name=org.kde.StatusNotifierItem-3-2
+  - --own-name=org.kde.StatusNotifierItem-3-3
+  - --own-name=org.kde.StatusNotifierItem-3-4
+  - --own-name=org.kde.StatusNotifierItem-3-5
+  - --own-name=org.kde.StatusNotifierItem-3-6
+  - --own-name=org.kde.StatusNotifierItem-3-7
+  - --own-name=org.kde.StatusNotifierItem-3-8
+  - --own-name=org.kde.StatusNotifierItem-3-9
   # Required to allow screensaver/idle inhibition such as during video calls
   - --talk-name=org.freedesktop.ScreenSaver
   # Required for advanced input methods e.g. writing CJK languages
