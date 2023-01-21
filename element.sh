@@ -9,6 +9,8 @@ then
     then
         FLAGS="$FLAGS --disable-gpu-sandbox"
     fi
+else
+    FLAGS="$FLAGS --enable-features=WebRTCPipeWireCapturer"
 fi
 
 env TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}" zypak-wrapper /app/Element/element-desktop $FLAGS "$@"
