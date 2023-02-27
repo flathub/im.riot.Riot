@@ -2,7 +2,7 @@
 
 FLAGS=''
 
-if [[ $XDG_SESSION_TYPE == "wayland" ]]
+if [[ $XDG_SESSION_TYPE == "wayland" && -e "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ]]
 then
     FLAGS="$FLAGS --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
     if  [ -c /dev/nvidia0 ]
