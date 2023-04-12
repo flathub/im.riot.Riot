@@ -2,11 +2,6 @@
 
 FLAGS=''
 
-# Workaround for currently broken search, disabling it, without the need to manage to navigate to seshat settings.
-if [[ $DISABLE_ENCRYPTED_SEARCH == "true" ]]; then
-    find ${XDG_CONFIG_HOME} -type d -a -name EventStore -exec rm -r {} \&\& touch {} \;
-fi
-
 if [[ $XDG_SESSION_TYPE == "wayland" && -e "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ]]
 then
     FLAGS="$FLAGS --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
