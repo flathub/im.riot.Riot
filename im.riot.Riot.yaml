@@ -66,13 +66,13 @@ modules:
       - type: archive
         only-arches:
           - x86_64
-        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.31.tar.gz
-        sha256: 9fc46497a1b01b8040225ab87c8abc47b9de9bb65f2e8eafce546006e7669bb2
+        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.32.tar.gz
+        sha256: b34e9d78a937bd64cb30c5a18ca1533acfcbb9ab87600d2c054ffac78d1698c2
         x-checker-data:
           type: html
           url: https://packages.element.io/desktop/install/linux/glibc-x86-64/index.html
-          version-pattern: "element-desktop-([\\d\\.-]*).tar.gz"
-          url-template: "https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-$version.tar.gz"
+          version-pattern: element-desktop-([\d\.-]*).tar.gz
+          url-template: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-$version.tar.gz
       - type: file
         path: element.sh
       - type: file
