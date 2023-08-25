@@ -5,6 +5,8 @@ runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: element
+rename-icon: element-desktop
+copy-icon: true
 separate-locales: false
 finish-args:
   # Version required to use the document-portal v4
@@ -49,28 +51,70 @@ cleanup:
   - /man
 modules:
   - shared-modules/libsecret/libsecret.json
+  - name: tcl
+    subdir: unix
+    build-options:
+      no-debuginfo: true
+    cleanup:
+      - '*'
+    sources:
+      - type: git
+        url: https://github.com/tcltk/tcl.git
+        tag: core-8-6-11
+        commit: 17b5b3e0201cdf92d3c125776e1b2dd453f225bd
+  - name: sqlcipher
+    rm-configure: true
+    config-opts:
+      - --enable-tempstore=yes
+      - --disable-tcl
+    build-options:
+      cflags: -DSQLITE_HAS_CODEC
+      ldflags: -lcrypto
+    sources:
+      - type: archive
+        url: https://github.com/sqlcipher/sqlcipher/archive/v4.3.0.tar.gz
+        sha256: fccb37e440ada898902b294d02cde7af9e8706b185d77ed9f6f4d5b18b4c305f
+      - type: shell
+        commands:
+          - cp -p /usr/share/automake-*/config.{sub,guess} .
+      - type: script
+        dest-filename: autogen.sh
+        commands:
+          - AUTOMAKE="automake --foreign" autoreconf -vfi
   - name: riot
     buildsystem: simple
     build-commands:
+      - ar x element-desktop_*.deb
+      - rm element-desktop_*.deb
+      - tar xf data.tar.xz
+      - cp -r 'opt/Element' /app/Element
+      - mkdir -p /app/share/icons/hicolor
+      - cp -r usr/share/icons/hicolor/* /app/share/icons/hicolor
+      - chmod -R a-s,go+rX,go-w "/app/Element"
       - install element.sh /app/bin/element
       - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
       - install -Dm644 im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
-      - rm element.sh im.riot.Riot.desktop im.riot.Riot.metainfo.xml
-      - install -Dm644 resources/img/element.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
-      - mkdir /app/Element
-      - cp -r * /app/Element
-      - chmod -R a-s,go+rX,go-w "/app/Element"
     sources:
-      - type: archive
+      - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.39.tar.gz
-        sha256: c05be0d6d1ec0ecaa2306cc0a8f686800a71329f1dda5c1f97b70cca80228c56
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.39_amd64.deb
+        sha256: 9f8a915f9993d5f3da0973082f32caee903a25b86cf6d738e06e613129dc53a4
         x-checker-data:
           type: html
-          url: https://packages.element.io/desktop/install/linux/glibc-x86-64/index.html
-          version-pattern: element-desktop-([\d\.-]*).tar.gz
-          url-template: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-$version.tar.gz
+          url: https://packages.element.io/debian/pool/main/e/element-desktop/index.html
+          version-pattern: "element-desktop_([\\d\\.-]*)_amd64.deb"
+          url-template: "https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_${version}_amd64.deb"
+      - type: file
+        only-arches:
+          - aarch64
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.39_arm64.deb
+        sha256: 67651bee5b1629a439874ce30067450e9cb8f4cb9fdcb308ce903838994825ef
+        x-checker-data:
+          type: html
+          url: https://packages.element.io/debian/pool/main/e/element-desktop/index.html
+          version-pattern: "element-desktop_([\\d\\.-]*)_arm64.deb"
+          url-template: "https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_${version}_arm64.deb"
       - type: file
         path: element.sh
       - type: file
