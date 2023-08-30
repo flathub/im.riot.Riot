@@ -98,8 +98,8 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.39_amd64.deb
-        sha256: 9f8a915f9993d5f3da0973082f32caee903a25b86cf6d738e06e613129dc53a4
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.40_amd64.deb
+        sha256: 010c99ed58010b7d54c961b54af30fcfe3aa364f85ad64d04fe2525cd7a628c0
         x-checker-data:
           type: html
           url: https://packages.element.io/debian/pool/main/e/element-desktop/index.html
@@ -108,8 +108,8 @@ modules:
       - type: file
         only-arches:
           - aarch64
-        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.39_arm64.deb
-        sha256: 67651bee5b1629a439874ce30067450e9cb8f4cb9fdcb308ce903838994825ef
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.40_arm64.deb
+        sha256: 17ba2ce882cce51885c91b38ef8e34ceee95ef80ddbedd8400ad4757e65cca74
         x-checker-data:
           type: html
           url: https://packages.element.io/debian/pool/main/e/element-desktop/index.html
