@@ -11,7 +11,7 @@ Element Desktop's [instructions](https://github.com/vector-im/element-desktop/#u
 
 Check out this repo or you fork, make sure to include the submodule:
 ```sh
-git clone  --recursive git@github.com:flathub/im.riot.Riot.git
+git clone --recursive git@github.com:flathub/im.riot.Riot.git
 cd im.riot.Riot
 ```
 
