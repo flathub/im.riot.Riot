@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Element
+Comment=A Matrix-based instant messaging client
 Icon=im.riot.Riot
 Exec=/app/bin/element %U
 Categories=Network;InstantMessaging;Chat;VideoConference;

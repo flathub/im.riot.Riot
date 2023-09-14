@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>im.riot.Riot.desktop</id>
+  <id>im.riot.Riot</id>
   <name>Element</name>
   <project_license>Apache-2.0</project_license>
   <developer_name>New Vector Ltd</developer_name>
@@ -30,6 +30,82 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.11.41" date="2023-09-12"/>
+    <release version="1.11.40" date="2023-08-29"/>
+    <release version="1.11.39" date="2023-08-15"/>
+    <release version="1.11.38" date="2023-08-04"/>
+    <release version="1.11.37" date="2023-08-01"/>
+    <release version="1.11.36" date="2023-07-18"/>
+    <release version="1.11.35" date="2023-07-04"/>
+    <release version="1.11.34" date="2023-06-20"/>
+    <release version="1.11.33" date="2023-06-09"/>
+    <release version="1.11.32" date="2023-06-06"/>
+    <release version="1.11.31" date="2023-05-11"/>
+    <release version="1.11.30" date="2023-04-25"/>
+    <release version="1.11.29" date="2023-04-11"/>
+    <release version="1.11.28" date="2023-03-31"/>
+    <release version="1.11.27" date="2023-03-31"/>
+    <release version="1.11.26" date="2023-03-28"/>
+    <release version="1.11.25" date="2023-03-15"/>
+    <release version="1.11.24" date="2023-02-28"/>
+    <release version="1.11.23" date="2023-02-14"/>
+    <release version="1.11.22" date="2023-01-31"/>
+    <release version="1.11.20" date="2023-01-20"/>
+    <release version="1.11.18" date="2023-01-18"/>
+    <release version="1.11.17" date="2022-12-21"/>
+    <release version="1.11.16" date="2022-12-06"/>
+    <release version="1.11.15" date="2022-11-22"/>
+    <release version="1.11.14" date="2022-11-08"/>
+    <release version="1.11.13" date="2022-11-01"/>
+    <release version="1.11.12" date="2022-10-26"/>
+    <release version="1.11.11" date="2022-10-25"/>
+    <release version="1.11.10" date="2022-10-11"/>
+    <release version="1.11.8" date="2022-09-28" urgency="critical">
+      <description>
+        Fixes various security vulnerabilities.
+
+        Details: https://matrix.org/blog/2022/09/28/upgrade-now-to-address-encryption-vulns-in-matrix-sdks-and-clients
+      </description>
+      <issues>
+        <issue type="cve">CVE-2022-39249</issue>
+        <issue type="cve">CVE-2022-39250</issue>
+        <issue type="cve">CVE-2022-39251</issue>
+        <issue type="cve">CVE-2022-39236</issue>
+      </issues>
+    </release>
+    <release version="1.11.5" date="2022-09-13"/>
+    <release version="1.11.4-1" date="2022-08-31"/>
+    <release version="1.11.4" date="2022-08-31"/>
+    <release version="1.11.3" date="2022-08-16"/>
+    <release version="1.11.2" date="2022-08-03"/>
+    <release version="1.11.1" date="2022-07-26"/>
+    <release version="1.11.0" date="2022-07-05"/>
+    <release version="1.10.15" date="2022-06-14"/>
+    <release version="1.10.14" date="2022-06-07"/>
+    <release version="1.10.13" date="2022-05-24"/>
+    <release version="1.10.12" date="2022-05-10"/>
+    <release version="1.10.11" date="2022-04-26"/>
+    <release version="1.10.10" date="2022-04-14"/>
+    <release version="1.10.9" date="2022-04-12"/>
+    <release version="1.10.8" date="2022-03-28"/>
+    <release version="1.10.7" date="2022-03-15"/>
+    <release version="1.10.6" date="2022-03-01"/>
+    <release version="1.10.5" date="2022-02-28"/>
+    <release version="1.10.4" date="2022-02-17"/>
+    <release version="1.10.3" date="2022-02-14"/>
+    <release version="1.10.1" date="2022-02-01"/>
+    <release version="1.10.0" date="2022-01-31"/>
+    <release version="1.9.9" date="2022-01-17"/>
+    <release version="1.9.8" date="2021-12-20"/>
+    <release version="1.9.7" date="2021-12-13" urgency="high">
+      <description>
+        <p>Fix for buffer overflow in libolm and matrix-js-sdk</p>
+        <p>Fix a crash on logout</p>
+      </description>
+      <issues>
+        <issue type="cve">CVE-2021-44538</issue>
+      </issues>
+    </release>
     <release version="1.9.6" date="2021-12-06"/>
     <release version="1.9.5" date="2021-11-22"/>
     <release version="1.9.4" date="2021-11-08"/>
