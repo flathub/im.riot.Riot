@@ -23,7 +23,6 @@ finish-args:
   # As a chat application, networking is required
   - --share=network
   # Required for notifications in various desktop environments
-  - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   # Required to allow screensaver/idle inhibition such as during video calls
   - --talk-name=org.freedesktop.ScreenSaver
