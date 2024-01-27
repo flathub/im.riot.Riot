@@ -26,8 +26,6 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   # Required to allow screensaver/idle inhibition such as during video calls
   - --talk-name=org.freedesktop.ScreenSaver
-  # Required for advanced input methods e.g. writing CJK languages
-  - --talk-name=org.freedesktop.portal.Fcitx
   # Required to store access tokens (persistent logins)
   - --filesystem=xdg-run/keyring
   # Required for experimental wayland support
@@ -47,7 +45,6 @@ cleanup:
   - /share/man
   - /man
 modules:
-  - shared-modules/libsecret/libsecret.json
   - name: riot
     buildsystem: simple
     build-commands:
