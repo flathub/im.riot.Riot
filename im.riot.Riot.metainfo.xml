@@ -9,6 +9,7 @@
   <url type="homepage">https://element.io/</url>
   <url type="help">https://element.io/help</url>
   <url type="translate">https://translate.element.io/</url>
+  <url type="vcs-browser">https://github.com/element-hq/element-desktop</url>
   <description>
     <p>More than group chat: communication</p>
     <ul>
