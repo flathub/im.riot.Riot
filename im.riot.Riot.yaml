@@ -60,8 +60,8 @@ modules:
       - type: archive
         only-arches:
           - x86_64
-        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.57.tar.gz
-        sha256: da2654b17b5dbe58e8e939dc98bc29873df19b4799421c681c468c0e132f54db
+        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.58.tar.gz
+        sha256: 9e80caa25b755ba9861cbf6dde61bf156a5b37233243538b719262779f214dea
         x-checker-data:
           type: html
           url: https://packages.element.io/desktop/install/linux/glibc-x86-64/index.html
