@@ -47,7 +47,6 @@ cleanup:
   - /share/man
   - /man
 modules:
-  - shared-modules/libsecret/libsecret.json
   - name: tcl
     subdir: unix
     build-options:
@@ -95,14 +94,23 @@ modules:
       - type: file
         only-arches:
           - x86_64
-        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.30_amd64.deb
-        sha256: 71e69e4c5adcd1ff035d5b2f398e7f25448baa8bd26889030939bdc3c2873dbf
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.59_amd64.deb
+        sha256: 1195c48e63ac4900cd8538a296dcfeb322cd6dd133358f1ee66699282e69056d
         x-checker-data:
-          type: debian-repo
-          package-name: element-desktop
-          root: https://packages.element.io/debian
-          dist: sid
-          component: main
+          type: html
+          url: https://packages.element.io/debian/pool/main/e/element-desktop/index.html
+          version-pattern: "element-desktop_([\\d\\.-]*)_amd64.deb"
+          url-template: "https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_${version}_amd64.deb"
+      - type: file
+        only-arches:
+          - aarch64
+        url: https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_1.11.59_arm64.deb
+        sha256: 34c3c29712357a660d68f25d6b731330ce84b04411eb6122700c8c96c9e18ef0
+        x-checker-data:
+          type: html
+          url: https://packages.element.io/debian/pool/main/e/element-desktop/index.html
+          version-pattern: "element-desktop_([\\d\\.-]*)_arm64.deb"
+          url-template: "https://packages.element.io/debian/pool/main/e/element-desktop/element-desktop_${version}_arm64.deb"
       - type: file
         path: element.sh
       - type: file
