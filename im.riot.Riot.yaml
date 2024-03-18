@@ -32,6 +32,8 @@ finish-args:
   - --filesystem=xdg-run/pipewire-0
   # For correct cursor scaling under Wayland
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+  # Required to use the UnityLauncherAPI
+  - --talk-name=com.canonical.Unity
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -56,6 +58,7 @@ modules:
       - mkdir /app/Element
       - cp -r * /app/Element
       - chmod -R a-s,go+rX,go-w "/app/Element"
+      - patch-desktop-filename ${FLATPAK_DEST}/Element/resources/app.asar
     sources:
       - type: archive
         only-arches:
