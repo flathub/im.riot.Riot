@@ -10,6 +10,7 @@
   <url type="help">https://element.io/help</url>
   <url type="translate">https://translate.element.io/</url>
   <url type="vcs-browser">https://github.com/element-hq/element-desktop</url>
+  <launchable type="desktop-id">im.riot.Riot.desktop</launchable>
   <description>
     <p>More than group chat: communication</p>
     <ul>
@@ -25,12 +26,16 @@
     <p>For GNOME, window decorations are currently missing and you'll have to use keyboard shortcuts instead to resize the window.</p>
   </description>
   <screenshots>
-    <screenshot>
+    <screenshot type="default">
       <caption>Element logged-in frontend</caption>
       <image type="source">https://user-images.githubusercontent.com/2221064/137519256-655fe0f9-55f0-44a4-b681-83711654fff0.png</image>
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.11.61" date="2024-03-14"/>
+    <release version="1.11.60" date="2024-03-12"/>
+    <release version="1.11.59" date="2024-02-27"/>
+    <release version="1.11.58" date="2024-02-13"/>
     <release version="1.11.57" date="2024-01-31"/>
     <release version="1.11.55" date="2024-01-19"/>
     <release version="1.11.54" date="2024-01-16"/>
@@ -259,8 +264,5 @@
     <content_attribute id="money-purchasing">none</content_attribute>
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
-  <provides>
-    <id>im.riot.Riot</id>
-  </provides>
   <update_contact>vrutkovs@redhat.com</update_contact>
 </component>
