@@ -265,4 +265,8 @@
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
   <update_contact>vrutkovs@redhat.com</update_contact>
+  <branding>
+    <color type="primary" scheme_preference="light">#71d7ae</color>
+    <color type="primary" scheme_preference="dark">#004832</color>
+  </branding>
 </component>
