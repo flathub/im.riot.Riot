@@ -32,6 +32,9 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.11.74" date="2024-08-13">
+      <description></description>
+    </release>
     <release version="1.11.73" date="2024-08-06" urgency="high">
        <issues>
          <issue type="cve">CVE-2024-42347</issue>
