@@ -32,11 +32,14 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.11.82" date="2024-10-22">
+      <description></description>
+    </release>
     <release version="1.11.81" date="2024-10-15" urgency="high">
        <issues>
          <issue type="cve">CVE-2024-47771</issue>
        </issues>
-      <description></description>
+      <description/>
     </release>
     <release version="1.11.80" date="2024-10-08">
       <description/>
