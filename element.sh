@@ -13,4 +13,13 @@ else
     FLAGS="$FLAGS --enable-features=WebRTCPipeWireCapturer"
 fi
 
+# to apply proxy from environment variable
+if [[ $all_proxy ]]; then
+    FLAGS="$FLAGS --proxy-server=$all_proxy"
+elif [[ $http_proxy ]]; then
+    FLAGS="$FLAGS --proxy-server=$http_proxy"
+elif [[ $https_proxy ]]; then
+    FLAGS="$FLAGS --proxy-server=$https_proxy"
+fi
+
 env TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}" zypak-wrapper /app/Element/element-desktop $FLAGS "$@"
