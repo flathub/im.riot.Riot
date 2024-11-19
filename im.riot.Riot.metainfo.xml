@@ -32,6 +32,9 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.11.86" date="2024-11-19">
+      <description></description>
+    </release>
     <release version="1.11.85" date="2024-11-12" urgency="high">
       <description/>
       <issues>
