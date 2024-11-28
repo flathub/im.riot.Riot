@@ -22,4 +22,6 @@ elif [[ $https_proxy ]]; then
     FLAGS="$FLAGS --proxy-server=$https_proxy"
 fi
 
-env TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}" zypak-wrapper /app/Element/element-desktop $FLAGS "$@"
+export TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}"
+
+exec zypak-wrapper /app/Element/element-desktop $FLAGS "$@"
