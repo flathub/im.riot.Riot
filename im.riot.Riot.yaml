@@ -35,7 +35,7 @@ finish-args:
   # Required to use the UnityLauncherAPI
   - --talk-name=com.canonical.Unity
   # Required for wayland/xorg auto switch
-  - --env=OZONE_PLATFORM=auto
+  - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 cleanup:
   - /include
   - /lib/pkgconfig
