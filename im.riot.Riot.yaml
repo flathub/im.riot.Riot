@@ -34,6 +34,8 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   # Required to use the UnityLauncherAPI
   - --talk-name=com.canonical.Unity
+  # Required for access to the safeStorage https://www.electronjs.org/de/docs/latest/api/safe-storage
+  - --talk-name=org.freedesktop.secrets
 cleanup:
   - /include
   - /lib/pkgconfig
