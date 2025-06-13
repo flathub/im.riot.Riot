@@ -19,7 +19,7 @@ finish-args:
   - --socket=wayland
   # Required to provide Call functionality
   - --socket=pulseaudio
-  - --device=all
+  - --device=dri
   # As a chat application, networking is required
   - --share=network
   # Required for notifications in various desktop environments
