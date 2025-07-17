@@ -2,7 +2,7 @@
 <component type="desktop">
   <id>im.riot.Riot</id>
   <name>Element</name>
-  <project_license>Apache-2.0</project_license>
+  <project_license>AGPL-3.0-only OR GPL-3.0-only</project_license>
   <developer_name>New Vector Ltd</developer_name>
   <summary>Secure communications platform built around you</summary>
   <metadata_license>CC0-1.0</metadata_license>
@@ -32,8 +32,11 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.11.105" date="2025-07-01">
+    <release version="1.11.106" date="2025-07-15">
       <description></description>
+    </release>
+    <release version="1.11.105" date="2025-07-01">
+      <description/>
     </release>
     <release version="1.11.104" date="2025-06-17">
       <description/>
@@ -211,10 +214,9 @@
     <release version="1.11.10" date="2022-10-11"/>
     <release version="1.11.8" date="2022-09-28" urgency="critical">
       <description>
-        Fixes various security vulnerabilities.
-
-        Details: https://matrix.org/blog/2022/09/28/upgrade-now-to-address-encryption-vulns-in-matrix-sdks-and-clients
+        <p>Fixes various security vulnerabilities.</p>
       </description>
+      <url>https://matrix.org/blog/2022/09/28/upgrade-now-to-address-encryption-vulns-in-matrix-sdks-and-clients</url>
       <issues>
         <issue type="cve">CVE-2022-39249</issue>
         <issue type="cve">CVE-2022-39250</issue>
