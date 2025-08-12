@@ -54,7 +54,7 @@ modules:
       - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
       - install -Dm644 im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
       - rm element.sh im.riot.Riot.desktop im.riot.Riot.metainfo.xml
-      - install -Dm644 resources/img/element.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm644 ElementLogomark.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - mkdir /app/Element
       - cp -r * /app/Element
       - chmod -R a-s,go+rX,go-w "/app/Element"
@@ -86,3 +86,5 @@ modules:
         path: im.riot.Riot.metainfo.xml
       - type: file
         path: im.riot.Riot.desktop
+      - type: file
+        path: ElementLogomark.svg
