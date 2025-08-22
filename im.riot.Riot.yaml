@@ -57,7 +57,7 @@ modules:
       - install -Dm644 im.riot.Riot.desktop /app/share/applications/im.riot.Riot.desktop
       - install -Dm644 im.riot.Riot.metainfo.xml /app/share/metainfo/im.riot.Riot.metainfo.xml
       - rm element.sh im.riot.Riot.desktop im.riot.Riot.metainfo.xml
-      - install -Dm644 resources/img/element.png /app/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm644 ElementLogomark.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - mkdir /app/Element
       - cp -r * /app/Element
       - chmod -R a-s,go+rX,go-w "/app/Element"
@@ -66,8 +66,8 @@ modules:
       - type: archive
         only-arches:
           - x86_64
-        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.106.tar.gz
-        sha256: 074eaf30d64cf6bdacebb0c77eff2f50b22e6a56165dce76c4956aa00e7d6f02
+        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.109.tar.gz
+        sha256: b14aca1d7632a6a8f873469f0615c36521cf6e7140114ddeb5e96ee9089766b9
         x-checker-data:
           type: html
           url: https://packages.element.io/desktop/install/linux/glibc-x86-64/index.html
@@ -76,8 +76,8 @@ modules:
       - type: archive
         only-arches:
           - aarch64
-        url: https://packages.element.io/desktop/install/linux/glibc-aarch64/element-desktop-1.11.106-arm64.tar.gz
-        sha256: a0ff71c6fe300334fa4061c3faa25194489fb2ff1fd25d4de6fefed3ee677bdc
+        url: https://packages.element.io/desktop/install/linux/glibc-aarch64/element-desktop-1.11.109-arm64.tar.gz
+        sha256: fdc9a4319e2fbb324869d3c42518ba19e6feeee4a89dd27514d81391ed09673a
         x-checker-data:
           type: html
           url: https://packages.element.io/desktop/install/linux/glibc-aarch64/index.html
@@ -89,3 +89,5 @@ modules:
         path: im.riot.Riot.metainfo.xml
       - type: file
         path: im.riot.Riot.desktop
+      - type: file
+        path: ElementLogomark.svg
