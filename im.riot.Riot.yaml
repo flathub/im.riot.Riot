@@ -22,6 +22,12 @@ finish-args:
   - --device=all
   # As a chat application, networking is required
   - --share=network
+  # Required for access to kwalletd (various versions) (secure storage)
+  - --talk-name=org.kde.kwalletd
+  - --talk-name=org.kde.kwalletd5
+  - --talk-name=org.kde.kwalletd6
+  # Required for access to libsecret (secure storage)
+  - --talk-name=org.freedesktop.secrets
   # Required for notifications in various desktop environments
   - --talk-name=org.kde.StatusNotifierWatcher
   # Required to allow screensaver/idle inhibition such as during video calls
