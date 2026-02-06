@@ -34,6 +34,9 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   # Required to use the UnityLauncherAPI
   - --talk-name=com.canonical.Unity
+  # Required to access system's libsecret
+  - --talk-name=org.freedesktop.secrets
+  
 cleanup:
   - /include
   - /lib/pkgconfig
