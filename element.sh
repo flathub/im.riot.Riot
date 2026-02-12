@@ -22,12 +22,12 @@ else
 fi
 
 # to apply proxy from environment variable
-if [[ $all_proxy ]]; then
-  ADDITIONAL_ARGS+=("--proxy-server=$all_proxy")
-elif [[ $http_proxy ]]; then
-  ADDITIONAL_ARGS+=("--proxy-server=$http_proxy")
-elif [[ $https_proxy ]]; then
-  ADDITIONAL_ARGS+=("--proxy-server=$https_proxy")
+if [[ -n "${all_proxy:-}" ]]; then
+  ADDITIONAL_ARGS+=("--proxy-server=${all_proxy}")
+elif [[ -n "${http_proxy:-}" ]]; then
+  ADDITIONAL_ARGS+=("--proxy-server=${http_proxy}")
+elif [[ -n "${https_proxy:-}" ]]; then
+  ADDITIONAL_ARGS+=("--proxy-server=${https_proxy}")
 fi
 
 if [[ "${ELEMENT_DEBUG_ENABLED:-}" == "true" ]]; then
