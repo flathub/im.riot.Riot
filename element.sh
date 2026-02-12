@@ -1,33 +1,40 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-FLAGS=''
+set -o errexit -o nounset -o pipefail
 
-# Checking for absolute path in WAYLAND_DISPLAY variable.
-# As referenced in the description of the `wl_display_add_socket` function at https://wayland.freedesktop.org/docs/html/apc.html#id-1.11.2
-if [ "${WAYLAND_DISPLAY:0:1}" = "/" ]; then
-    WAYLAND_SOCKET_PATH="${WAYLAND_DISPLAY}"
-else
-    WAYLAND_SOCKET_PATH="$XDG_RUNTIME_DIR/${WAYLAND_DISPLAY:-wayland-0}"
+ADDITIONAL_ARGS=()
+
+if [[ -n "${FLATPAK_ID:-}" && -n "${XDG_RUNTIME_DIR:-}" ]]; then
+  export TMPDIR="${XDG_RUNTIME_DIR}/app/${FLATPAK_ID}"
 fi
 
-if [[ $XDG_SESSION_TYPE == "wayland" && -e "$WAYLAND_SOCKET_PATH" ]]
-then
-    FLAGS="$FLAGS --enable-wayland-ime --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
-    if  [ -c /dev/nvidia0 ]
-    then
-        FLAGS="$FLAGS --disable-gpu-sandbox"
-    fi
+if [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]; then
+  # TODO: Rework this when application upgrades to Electron 38
+  ADDITIONAL_ARGS+=("--enable-features=UseOzonePlatform,WaylandWindowDecorations,WebRTCPipeWireCapturer")
+  ADDITIONAL_ARGS+=("--enable-wayland-ime")
+  ADDITIONAL_ARGS+=("--ozone-platform-hint=auto")
+  ADDITIONAL_ARGS+=("--wayland-text-input-version=3")
+  if [[ -c "/dev/nvidia0" ]]; then
+    ADDITIONAL_ARGS+=("--disable-gpu-sandbox")
+  fi
 else
-    FLAGS="$FLAGS --enable-features=WebRTCPipeWireCapturer"
+  ADDITIONAL_ARGS+=("--enable-features=WebRTCPipeWireCapturer")
 fi
 
 # to apply proxy from environment variable
 if [[ $all_proxy ]]; then
-    FLAGS="$FLAGS --proxy-server=$all_proxy"
+  ADDITIONAL_ARGS+=("--proxy-server=$all_proxy")
 elif [[ $http_proxy ]]; then
-    FLAGS="$FLAGS --proxy-server=$http_proxy"
+  ADDITIONAL_ARGS+=("--proxy-server=$http_proxy")
 elif [[ $https_proxy ]]; then
-    FLAGS="$FLAGS --proxy-server=$https_proxy"
+  ADDITIONAL_ARGS+=("--proxy-server=$https_proxy")
 fi
 
-env TMPDIR="$XDG_RUNTIME_DIR/app/${FLATPAK_ID:-im.riot.Riot}" zypak-wrapper /app/Element/element-desktop $FLAGS "$@"
+if [[ "${ELEMENT_DEBUG_ENABLED:-}" == "true" ]]; then
+  printf "ADDITIONAL_ARGS: [%s]\n" "${ADDITIONAL_ARGS[*]:-}"
+  printf "TMPDIR: %s\n" "${TMPDIR:-}"
+  printf "XDG_CURRENT_DESKTOP: %s\n" "${XDG_CURRENT_DESKTOP:-}"
+  printf "XDG_SESSION_TYPE: %s\n" "${XDG_SESSION_TYPE:-}"
+fi
+
+exec zypak-wrapper "/app/Element/element-desktop" "${ADDITIONAL_ARGS[@]}" "$@"
