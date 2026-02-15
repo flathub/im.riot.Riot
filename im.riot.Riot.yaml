@@ -34,6 +34,7 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   # Required to use the UnityLauncherAPI
   - --talk-name=com.canonical.Unity
+  - --talk-name=org.freedesktop.secrets
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -46,6 +47,22 @@ cleanup:
   - /share/info
   - /share/man
   - /man
+  - name: libsecret
+    buildsystem: meson
+    config-opts:
+      - -Dmanpage=false
+      - -Dvapi=false
+      - -Dgtk_doc=false
+      - -Dintrospection=false
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+    sources:
+      - type: archive
+        url: https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.6.tar.xz
+        sha256: 747b8c175be108c880d3adfb9c3537ea66e520e4ad2dccf5dce58003aeeca090
 modules:
   - name: riot
     buildsystem: simple
