@@ -58,7 +58,7 @@ modules:
       - mkdir /app/Element
       - cp -r * /app/Element
       - chmod -R a-s,go+rX,go-w "/app/Element"
-      - patch-desktop-filename ${FLATPAK_DEST}/Element/resources/app.asar
+      - patch-electron-desktop-filename ${FLATPAK_DEST}/Element/resources/app.asar
     sources:
       - type: archive
         only-arches:
