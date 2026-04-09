@@ -34,6 +34,9 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   # Required to use the UnityLauncherAPI
   - --talk-name=com.canonical.Unity
+  # Required for KDE Encryption
+  - --talk-name=org.kde.kwalletd5
+  - --talk-name=org.kde.kwalletd6
 cleanup:
   - /include
   - /lib/pkgconfig
