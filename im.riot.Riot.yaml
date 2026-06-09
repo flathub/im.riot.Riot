@@ -63,8 +63,8 @@ modules:
       - type: archive
         only-arches:
           - x86_64
-        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.12.20.tar.gz
-        sha256: be1e86754dcf7dd007aeea8a93f68568e312118b8c2c89059fcd77562429bb84
+        url: https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.12.21.tar.gz
+        sha256: 6ca02ef97703dccb9f4317f1effee54024bf0313d123c25a1d39053e9845008b
         x-checker-data:
           type: html
           url: https://packages.element.io/desktop/install/linux/glibc-x86-64/index.html
@@ -73,8 +73,8 @@ modules:
       - type: archive
         only-arches:
           - aarch64
-        url: https://packages.element.io/desktop/install/linux/glibc-aarch64/element-desktop-1.12.20-arm64.tar.gz
-        sha256: 370a52dbab553b4efafe38c87ee63dd12521a41f56bf7dc1f0ad31af18012edb
+        url: https://packages.element.io/desktop/install/linux/glibc-aarch64/element-desktop-1.12.21-arm64.tar.gz
+        sha256: 2da6d984264c83768a649abf1ddbdd9306b3918b87c6157fb56a802b79e15fc0
         x-checker-data:
           type: html
           url: https://packages.element.io/desktop/install/linux/glibc-aarch64/index.html
