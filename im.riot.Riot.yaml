@@ -34,6 +34,8 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   # Required to use the UnityLauncherAPI
   - --talk-name=com.canonical.Unity
+  # Required for access to the safeStorage https://www.electronjs.org/de/docs/latest/api/safe-storage
+  - --talk-name=org.freedesktop.secrets
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -47,6 +49,23 @@ cleanup:
   - /share/man
   - /man
 modules:
+  - name: libsecret
+    buildsystem: meson
+    config-opts:
+      - -Dmanpage=false
+      - -Dcrypto=disabled
+      - -Dvapi=false
+      - -Dgtk_doc=false
+      - -Dintrospection=false
+    cleanup:
+      - /bin
+      - /include
+      - /lib/pkgconfig
+      - /share/man
+    sources:
+      - type: archive
+        url: https://download.gnome.org/sources/libsecret/0.21/libsecret-0.21.6.tar.xz
+        sha256: 747b8c175be108c880d3adfb9c3537ea66e520e4ad2dccf5dce58003aeeca090
   - name: riot
     buildsystem: simple
     build-commands:
