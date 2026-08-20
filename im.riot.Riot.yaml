@@ -26,6 +26,8 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   # Required to allow screensaver/idle inhibition such as during video calls
   - --talk-name=org.freedesktop.ScreenSaver
+  # Required to store secret keys for message encryption on KDE
+  - --talk-name=org.kde.kwalletd6
   # Required to store access tokens (persistent logins)
   - --filesystem=xdg-run/keyring
   # Required for experimental wayland support
