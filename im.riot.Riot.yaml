@@ -19,7 +19,8 @@ finish-args:
   - --socket=wayland
   # Required to provide Call functionality
   - --socket=pulseaudio
-  - --device=all
+  # GPU access only; cameras use the PipeWire camera portal
+  - --device=dri
   # As a chat application, networking is required
   - --share=network
   # Required for notifications in various desktop environments
