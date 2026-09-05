@@ -12,13 +12,13 @@ fi
 
 if [[ $XDG_SESSION_TYPE == "wayland" && -e "$WAYLAND_SOCKET_PATH" ]]
 then
-    FLAGS="$FLAGS --enable-wayland-ime --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
+    FLAGS="$FLAGS --enable-wayland-ime --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer,WebRtcPipeWireCamera"
     if  [ -c /dev/nvidia0 ]
     then
         FLAGS="$FLAGS --disable-gpu-sandbox"
     fi
 else
-    FLAGS="$FLAGS --enable-features=WebRTCPipeWireCapturer"
+    FLAGS="$FLAGS --enable-features=WebRTCPipeWireCapturer,WebRtcPipeWireCamera"
 fi
 
 # to apply proxy from environment variable
