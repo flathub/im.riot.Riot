@@ -1,0 +1,29 @@
+# adapted from https://github.com/flathub/com.github.wwmm.easyeffects/blob/master/.github/workflows/update-beta.yml
+name: Check for nightly updates in beta branch
+on:
+  schedule:
+  - cron: "0 5,6 * * *" # run twice very 24 hours, a scheduled workflow only runs if in the default branch. 
+  # We need to run a second time so it can be automatically merged.
+  workflow_dispatch:
+
+jobs:
+  flatpak-external-data-checker:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub/flatpak-external-data-checker
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: beta # with this workflow, f-e-d-c will specifically checkout and submit a PR against beta, not master.
+
+      - uses: docker://ghcr.io/flathub/flatpak-external-data-checker:latest
+        env:
+          GIT_AUTHOR_NAME: Flatpak External Data Checker
+          GIT_COMMITTER_NAME: Flatpak External Data Checker
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: --update --never-fork im.riot.Riot.yaml
